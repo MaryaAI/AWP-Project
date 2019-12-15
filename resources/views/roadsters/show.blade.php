@@ -42,7 +42,35 @@
 
                     <br><hr><br>
 
+                    <div class="form-group">
 
+             <table class="table table-striped">
+                 <tr>
+                     <td> التعليقات</td>
+                 </tr>
+
+                 @foreach($roadster->comments as $c)
+
+                     <tr>
+                         <td>  {{$c->comment}}
+                         </td>
+                     </tr>
+                 @endforeach
+
+             </table>
+
+             <form action="/roadsters/{{$roadster->id}}" method="POST">
+                 {{csrf_field()}}
+                 <div class="form-group">
+                     <label for="usr">التعليق:</label>
+                     <textarea rows="4" cols="50"  name="comment1" class="form-control">
+       </textarea>
+                 </div>
+
+                 </br>
+                 <input type="submit" value="إضافة تعليق" class="btn btn-primary"/>
+             </form>
+         </div>
 
 
                 </div>

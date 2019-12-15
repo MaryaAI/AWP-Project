@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Roadster;
+use App\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RoadstersController extends Controller
 {
@@ -12,6 +14,8 @@ class RoadstersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+  
     public function index()
     {
         //
@@ -81,5 +85,20 @@ class RoadstersController extends Controller
     public function destroy(Roadster $roadster)
     {
         //
+    }
+
+    public  function  read(Request $request ,$id){
+        if ($request->isMethod('post')){
+            $ar= new Comment();
+            $ar->user_id=Auth::user()->id;
+            $ar->roadster_id=$id;
+            $ar->comment=$request->input('comment1');
+            $ar->save();
+            // return redirect("view");
+        }
+
+        $article=Roadster::find($id);
+        $ar=Array('roadster'=>$article);
+        return view("roadsters.show",$ar );
     }
 }

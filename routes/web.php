@@ -16,8 +16,11 @@
 //});
 Route::get('/', 'HomeController@index')->name('index');
 Route::get('/search', 'HomeController@search')->name('search');
-Route::resource('roadsters', 'RoadstersController');
+//Route::resource('roadsters', 'RoadstersController');
 Route::get('/categories/{category}', 'CategoriesController@result')->name('categories.show');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('roadsters', 'RoadstersController');
+Route::get('/roadsters/{id}', 'RoadstersController@read');
+Route::post('/roadsters/{id}', 'RoadstersController@read')->middleware('auth');
