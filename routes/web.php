@@ -1,4 +1,6 @@
 <?php
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +26,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('roadsters', 'RoadstersController');
 Route::get('/roadsters/{id}', 'RoadstersController@read');
 Route::post('/roadsters/{id}', 'RoadstersController@read')->middleware('auth');
+Route::get('/admin', function () {
+    return view('theme.default');
+});

@@ -45,8 +45,9 @@ class CategoriesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Category $category)
-    {
-      public function result(Category $category)
+    {}
+
+    public function result(Category $category)
   {
       $roadsters = $category->roadsters()->paginate(12);
       $title = 'القطع التابعة لتصنيف: ' . $category->name;
@@ -54,7 +55,7 @@ class CategoriesController extends Controller
   }
 
 
-    }
+
 
     /**
      * Show the form for editing the specified resource.
