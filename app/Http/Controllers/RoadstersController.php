@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Roadster;
 use App\Comment;
+use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,11 +16,15 @@ class RoadstersController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-  
+
     public function index()
     {
-        //
+
+        $roadsters = Roadster::all();
+        return view('admin.roadsters.index', compact('roadsters'));
     }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -28,7 +33,11 @@ class RoadstersController extends Controller
      */
     public function create()
     {
-        //
+
+        $categories = Category::all();
+        return view('admin.roadsters.create', compact('categories'));
+
+
     }
 
     /**
@@ -37,10 +46,37 @@ class RoadstersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
+
+        public function store(Request $request)
+
+        {
+            $this->validate($request, [
+                'name' => 'required',
+                'cover_image' => 'image|required',
+                'category' => 'nullable',
+                'description' => 'nullable',
+                'price' => 'numeric|required',
+            ]);
+
+            $roadster = new Roadster();
+
+            $roadster->name = $request->name;
+            $roadster->cover_image = $request->file('cover_image')->store('images/covers', 'public');
+            $roadster->category_id = $request->category;
+            $roadster->description = $request->description;
+            $roadster->price = $request->price;
+
+            $roadster->save();
+
+
+            session()->flash('flash_message',  'تمت إضافة الكتاب بنجاح');
+
+            return back();
+        }
+
+
+
+
 
     /**
      * Display the specified resource.

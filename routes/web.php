@@ -1,4 +1,7 @@
 <?php
+
+use App\Http\Controllers\AdminsController;
+use Doctrine\DBAL\Schema\Index;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,6 +29,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('roadsters', 'RoadstersController');
 Route::get('/roadsters/{id}', 'RoadstersController@read');
 Route::post('/roadsters/{id}', 'RoadstersController@read')->middleware('auth');
-Route::get('/admin', function () {
-    return view('theme.default');
-});
+
+Route::get('/admin', 'AdminsController@index');
+Route::get('/admin/roadsters/create', 'RoadstersController@create')->name('roadsters.create');
+Route::get('/admin/roadsters', 'RoadstersController@index')->name('roadsters.index');
+Route::post('/admin/roadsters', 'RoadstersController@store');
+
