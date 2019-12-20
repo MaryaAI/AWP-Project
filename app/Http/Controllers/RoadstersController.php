@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Roadster;
 use App\Comment;
 use App\Category;
+use App\Rating;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class RoadstersController extends Controller
 {
@@ -96,8 +99,10 @@ class RoadstersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Roadster $roadster)
+
     {
-        //
+        $categories = Category::all();
+        return view('admin.roadsters.edit', compact('roadster','categories'));
     }
 
     /**
@@ -109,7 +114,26 @@ class RoadstersController extends Controller
      */
     public function update(Request $request, Roadster $roadster)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'cover_image' => 'image',
+            'category' => 'nullable',
+            'description' => 'nullable',
+            'price' => 'numeric|required',
+        ]);
+
+        $roadster->name = $request->name;
+        $roadster->category_id = $request->category;
+        $roadster->description = $request->description;
+        $roadster->price = $request->price;
+
+        $roadster->save();
+
+
+
+        session()->flash('flash_message',  'تم تعديل المنتج بنجاح');
+
+        return redirect(route('roadsters.show', $roadster));
     }
 
     /**
@@ -120,7 +144,13 @@ class RoadstersController extends Controller
      */
     public function destroy(Roadster $roadster)
     {
-        //
+        Storage::disk('public')->delete($roadster->cover_image);
+
+        $roadster->delete();
+
+        session()->flash('flash_message','تم حذف الكتاب بنجاح');
+
+        return redirect(route('roadsters.index'));
     }
 
     public  function  read(Request $request ,$id){
@@ -137,4 +167,21 @@ class RoadstersController extends Controller
         $ar=Array('roadster'=>$article);
         return view("roadsters.show",$ar );
     }
+    public function rate(Request $request, Roadster $roadster)
+    {
+        if(auth()->user()->User::rated($roadster)) {
+            $rating = Rating::where(['user_id' => auth()->user()->id, 'roadster_id' => $roadster->id])->first();
+            $rating->value = $request->value;
+            $rating->save();
+        } else {
+            $rating = new Rating;
+            $rating->user_id = auth()->user()->id;
+            $rating->roadster_id = $roadster->id;
+            $rating->value = $request->value;
+            $rating->save();
+        }
+
+        return back();
+    }
+
 }

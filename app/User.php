@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+Use App\Roadster;
 
 class User extends Authenticatable
 {
@@ -36,4 +37,25 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function ratings()
+{
+    return $this->hasMany('App\Rating');
+}
+public function rated(Roadster $roadster)
+{
+    return $this->ratings->where('roadster_id', $roadster->id)->isNotEmpty();
+}
+public function bookRating(Roadster $roadster)
+{
+    return $this->rated($roadster) ? $this->ratings->where('roadster_id', $roadster->id)->first() : NULL;
+}
+
+public function roadstersInCart()
+{
+    return $this->belongsToMany('App\Roadster');
+}
+
+
 }
