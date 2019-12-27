@@ -44,6 +44,9 @@
 </div>
 @endsection
 
+
+
+
 @section('script')
 <!-- Page level plugins -->
 <script src="{{ asset('theme/vendor/datatables/jquery.dataTables.min.js') }}"></script>
