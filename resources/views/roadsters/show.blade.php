@@ -69,7 +69,7 @@
 
                     </table>
                     @auth
-                        <h4>قيّم هذا الكتاب<h4>
+                        <h4>قيّم هذا المنتج<h4>
 
                         @if(auth()->user()->rated($roadster))
                             <div class="rating">
