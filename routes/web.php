@@ -38,7 +38,7 @@ Route::get('/admin/roadsters/{roadster}', 'RoadstersController@show')->name('roa
 Route::patch('/admin/roadsters/{roadster}/edit', 'RoadstersController@edit')->name('roadsters.edit');
 Route::get('/admin/roadsters/{roadster}', 'RoadstersController@update');
 
-Route::get('/admin/categories', 'CategoriesController@index')->name('categories.Index');
+//Route::get('/admin/categories', 'CategoriesController@index')->name('categories.Index');
 Route::resource('/admin/categories', 'CategoriesController');
 Route::resource('/admin/roadsters', 'RoadstersController');
 
