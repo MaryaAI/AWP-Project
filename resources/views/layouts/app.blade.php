@@ -25,389 +25,95 @@
 
     <style>
         .bg-danger, .bg-success {
-            padding: 16px 0;
-            border-radius: 5px;
-            text-align: center;
-            margin: 0 auto;
-            margin-bottom: 10px;
-        }
-        .card {
-            text-align: right;
-            direction: rtl;
-        }
-        .rating {
-            overflow: hidden;
-            display: inline-block;
-            position: relative;
-            font-size:20px;
-            color: #FFCA00;
-        }
-        .rating-star {
-            padding: 0 5px;
-            margin: 0;
-            cursor: pointer;
-            display: block;
-            float: left;
-        }
-        .rating-star:after {
-            position: relative;
-            font-family: FontAwesome;
-            content:'\f006';
-        }
+                padding: 16px 0;
+                border-radius: 5px;
+                text-align: center;
+                margin: 0 auto;
+                margin-bottom: 10px;
+            }
+            .card {
+                text-align: right;
+                direction: rtl;
+            }
+            .rating {
+                overflow: hidden;
+                display: inline-block;
+                position: relative;
+                font-size:20px;
+                color: #FFCA00;
+            }
+            .rating-star {
+                padding: 0 5px;
+                margin: 0;
+                cursor: pointer;
+                display: block;
+                float: left;
+            }
+            .rating-star:after {
+                position: relative;
+                font-family: FontAwesome;
+                content:'\f006';
+            }
 
-        .rating-star.checked ~ .rating-star:after,
-        .rating-star.checked:after {
-            content:'\f005';
-        }
+            .rating-star.checked ~ .rating-star:after,
+            .rating-star.checked:after {
+                content:'\f005';
+            }
 
-        .rating:hover .rating-star:after {content:'\f006';}
+            .rating:hover .rating-star:after {content:'\f006';}
 
-        .rating-star:hover ~ .rating-star:after,
-        .rating-star:hover:after {
-            content:'\f005' !important;
-        }
+            .rating-star:hover ~ .rating-star:after,
+            .rating-star:hover:after {
+                content:'\f005' !important;
+            }
 
-        .score {
-            display: block;
-            font-size: 16px;
-            position: relative;
-            overflow: hidden;
-        }
-        .score-wrap {
-            display: inline-block;
-            position: relative;
-            height: 19px;
-        }
-        .score .stars-active {
-            color: #FFCA00;
-            position: relative;
-            z-index: 10;
-            display: inline-block;
-            overflow: hidden;
-            white-space: nowrap;
-        }
-        .score .stars-inactive {
-            color: lightgrey;
-            position: absolute;
-            top: 0;
-            left: 0;
-            -webkit-text-stroke: initial;
-            /* overflow: hidden; */
-        }
+            .score {
+                display: block;
+                font-size: 16px;
+                position: relative;
+                overflow: hidden;
+            }
+            .score-wrap {
+                display: inline-block;
+                position: relative;
+                height: 19px;
+            }
+            .score .stars-active {
+                color: #FFCA00;
+                position: relative;
+                z-index: 10;
+                display: inline-block;
+                overflow: hidden;
+                white-space: nowrap;
+            }
+            .score .stars-inactive {
+                color: lightgrey;
+                position: absolute;
+                top: 0;
+                left: 0;
+                -webkit-text-stroke: initial;
+                /* overflow: hidden; */
+            }
 
-        .my-dropdown {
-            position: relative;
-            display: inline-block;
-            text-align:right;
-        }
+            .my-dropdown {
+                position: relative;
+                display: inline-block;
+                text-align:right;
+            }
 
-        .my-dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            padding: 12px 16px;
-            z-index: 1;
-        }
+            .my-dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                padding: 12px 16px;
+                z-index: 1;
+            }
 
-        .my-dropdown:hover .my-dropdown-content {
-            display: block;
-        }
-
-        .rating {
-            overflow: hidden;
-            display: inline-block;
-            position: relative;
-            font-size:20px;
-            color: #FFCA00;
-        }
-        .rating-star {
-            padding: 0 5px;
-            margin: 0;
-            cursor: pointer;
-            display: block;
-            float: left;
-        }
-        .rating-star:after {
-            position: relative;
-            font-family: FontAwesome;
-            content:'\f006';
-        }
-
-        .rating-star.checked ~ .rating-star:after,
-        .rating-star.checked:after {
-            content:'\f005';
-        }
-
-        .rating:hover .rating-star:after {content:'\f006';}
-
-        .rating-star:hover ~ .rating-star:after,
-        .rating-star:hover:after {
-            content:'\f005' !important;
-
-        .bg-danger, .bg-success {
-            padding: 16px 0;
-            border-radius: 5px;
-            text-align: center;
-            margin: 0 auto;
-            margin-bottom: 10px;
-        }
-        .card {
-            text-align: right;
-            direction: rtl;
-        }
-        .rating {
-            overflow: hidden;
-            display: inline-block;
-            position: relative;
-            font-size:20px;
-            color: #FFCA00;
-        }
-        .rating-star {
-            padding: 0 5px;
-            margin: 0;
-            cursor: pointer;
-            display: block;
-            float: left;
-        }
-        .rating-star:after {
-            position: relative;
-            font-family: FontAwesome;
-            content:'\f006';
-        }
-
-        .rating-star.checked ~ .rating-star:after,
-        .rating-star.checked:after {
-            content:'\f005';
-        }
-
-        .rating:hover .rating-star:after {content:'\f006';}
-
-        .rating-star:hover ~ .rating-star:after,
-        .rating-star:hover:after {
-            content:'\f005' !important;
-        }
-
-        .score {
-            display: block;
-            font-size: 16px;
-            position: relative;
-            overflow: hidden;
-        }
-        .score-wrap {
-            display: inline-block;
-            position: relative;
-            height: 19px;
-        }
-        .score .stars-active {
-            color: #FFCA00;
-            position: relative;
-            z-index: 10;
-            display: inline-block;
-            overflow: hidden;
-            white-space: nowrap;
-        }
-        .score .stars-inactive {
-            color: lightgrey;
-            position: absolute;
-            top: 0;
-            left: 0;
-            -webkit-text-stroke: initial;
-            /* overflow: hidden; */
-        }
-
-        .my-dropdown {
-            position: relative;
-            display: inline-block;
-            text-align:right;
-        }
-
-        .my-dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            padding: 12px 16px;
-            z-index: 1;
-        }
-
-        .my-dropdown:hover .my-dropdown-content {
-            display: block;
-        }
-        .bg-danger, .bg-success {
-            padding: 16px 0;
-            border-radius: 5px;
-            text-align: center;
-            margin: 0 auto;
-            margin-bottom: 10px;
-        }
-        .card {
-            text-align: right;
-            direction: rtl;
-        }
-        .rating {
-            overflow: hidden;
-            display: inline-block;
-            position: relative;
-            font-size:20px;
-            color: #FFCA00;
-        }
-        .rating-star {
-            padding: 0 5px;
-            margin: 0;
-            cursor: pointer;
-            display: block;
-            float: left;
-        }
-        .rating-star:after {
-            position: relative;
-            font-family: FontAwesome;
-            content:'\f006';
-        }
-
-        .rating-star.checked ~ .rating-star:after,
-        .rating-star.checked:after {
-            content:'\f005';
-        }
-
-        .rating:hover .rating-star:after {content:'\f006';}
-
-        .rating-star:hover ~ .rating-star:after,
-        .rating-star:hover:after {
-            content:'\f005' !important;
-        }
-
-        .score {
-            display: block;
-            font-size: 16px;
-            position: relative;
-            overflow: hidden;
-        }
-        .score-wrap {
-            display: inline-block;
-            position: relative;
-            height: 19px;
-        }
-        .score .stars-active {
-            color: #FFCA00;
-            position: relative;
-            z-index: 10;
-            display: inline-block;
-            overflow: hidden;
-            white-space: nowrap;
-        }
-        .score .stars-inactive {
-            color: lightgrey;
-            position: absolute;
-            top: 0;
-            left: 0;
-            -webkit-text-stroke: initial;
-            /* overflow: hidden; */
-        }
-
-        .my-dropdown {
-            position: relative;
-            display: inline-block;
-            text-align:right;
-        }
-
-        .my-dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            padding: 12px 16px;
-            z-index: 1;
-        }
-
-        .my-dropdown:hover .my-dropdown-content {
-            display: block;
-        }
-
-        .rating {
-            overflow: hidden;
-            display: inline-block;
-            position: relative;
-            font-size:20px;
-            color: #FFCA00;
-        }
-        .rating-star {
-            padding: 0 5px;
-            margin: 0;
-            cursor: pointer;
-            display: block;
-            float: left;
-        }
-        .rating-star:after {
-            position: relative;
-            font-family: FontAwesome;
-            content:'\f006';
-        }
-
-        .rating-star.checked ~ .rating-star:after,
-        .rating-star.checked:after {
-            content:'\f005';
-        }
-
-        .rating:hover .rating-star:after {content:'\f006';}
-
-        .rating-star:hover ~ .rating-star:after,
-        .rating-star:hover:after {
-            content:'\f005' !important;
-        }
-
-
-
-        .score {
-            display: block;
-            font-size: 16px;
-            position: relative;
-            overflow: hidden;
-        }
-        .score-wrap {
-            display: inline-block;
-            position: relative;
-            height: 19px;
-        }
-        .score .stars-active {
-            color: #FFCA00;
-            position: relative;
-            z-index: 10;
-            display: inline-block;
-            overflow: hidden;
-            white-space: nowrap;
-        }
-        .score .stars-inactive {
-            color: lightgrey;
-            position: absolute;
-            top: 0;
-            left: 0;
-            -webkit-text-stroke: initial;
-            /* overflow: hidden; */
-        }
-
-        .my-dropdown {
-            position: relative;
-            display: inline-block;
-            text-align:right;
-        }
-
-        .my-dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            padding: 12px 16px;
-            z-index: 1;
-        }
-
-        .my-dropdown:hover .my-dropdown-content {
-            display: block;
-        }
+            .my-dropdown:hover .my-dropdown-content {
+                display: block;
+            }
     </style>
 </head>
 <body>
