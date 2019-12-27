@@ -479,8 +479,28 @@
     </nav>
 
     <main class="py-4">
-        @yield('content')
-    </main>
+        @if(Session::has('flash_message'))
+        <div class="bg-success col-md-8">
+            {{session('flash_message')}}
+        </div>
+    @endif
+
+    @if(Session::has('warning_message'))
+        <div class="bg-danger col-md-8">
+            {{session('warning_message')}}
+        </div>
+    @endif
+
+    @yield('content')
+</main>
 </div>
+
+@yield('script')
+
+<script>
+$('div.bg-success').delay(5000).slideUp(300);
+$('div.bg-danger').delay(5000).slideUp(300);
+</script>
+
 </body>
 </html>
