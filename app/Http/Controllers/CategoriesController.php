@@ -15,7 +15,7 @@ class CategoriesController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('admin.categories.index', compact('categories'));
+        return view('admin.categories.Index', compact('categories'));
     }
     /**
      * Show the form for creating a new resource.
@@ -44,7 +44,7 @@ class CategoriesController extends Controller
 
         session()->flash('flash_message',  'تمت إضافة التصنيف بنجاح');
 
-        return redirect(route('categories.index'));
+        return redirect(route('categories.Index'));
     }
 
     /**
