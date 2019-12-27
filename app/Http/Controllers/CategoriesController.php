@@ -94,7 +94,7 @@ class CategoriesController extends Controller
 
         session()->flash('flash_message',  'تم تعديل التصنيف بنجاح');
 
-        return redirect(route('categories.index'));
+        return redirect(route('categories.Index'));
     }
 
     /**
@@ -109,6 +109,6 @@ class CategoriesController extends Controller
 
         session()->flash('flash_message','تم حذف التصنيف بنجاح');
 
-        return redirect(route('categories.index'));
+        return redirect(route('categories.Index'));
     }
 }
